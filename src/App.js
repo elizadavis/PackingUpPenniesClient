@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import './App.scss'
 import { Route } from 'react-router-dom'
 
@@ -8,6 +8,11 @@ import SignUp from './auth/components/SignUp'
 import SignIn from './auth/components/SignIn'
 import SignOut from './auth/components/SignOut'
 import ChangePassword from './auth/components/ChangePassword'
+import Expenses from './expenses/components/Expenses'
+import Expense from './expenses/components/Expense'
+import ExpenseCreate from './expenses/components/ExpenseCreate'
+import Trips from './trips/components/Trips'
+import TripCreate from './trips/components/TripCreate'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -33,7 +38,7 @@ class App extends Component {
     const { alerts, user } = this.state
 
     return (
-      <React.Fragment>
+      <Fragment>
         <Header user={user} />
         {alerts.map((alert, index) => (
           <Alert key={index} dismissible variant={alert.type}>
@@ -55,8 +60,24 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword alert={this.alert} user={user} />
           )} />
+          <Route user={user} exact path='/dashboard' render={() => (
+            <Fragment>
+              <Trips user={user} />
+              <Expenses user={user} />
+              <ExpenseCreate user={user} />
+            </Fragment>
+          )} />
+          <AuthenticatedRoute user={user} exact path='/expenses' render={() => (
+            <Expenses user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/trips' render={() => (
+            <TripCreate user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/expenses/:id' render={() => (
+            <Expense user={user} />
+          )} />
         </main>
-      </React.Fragment>
+      </Fragment>
     )
   }
 }
