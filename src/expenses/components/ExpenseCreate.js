@@ -46,6 +46,7 @@ class ExpenseCreate extends Component {
       },
       data: { expense: this.state.expense }
     })
+      .then(d => { console.log(d); return d })
       .then(res => this.setState({ createdTripId: res.data.expense._id }))
       .catch(console.error)
   }

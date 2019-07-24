@@ -43,14 +43,32 @@ class Expense extends Component {
       .catch(err => this.setState({ error: err.message }))
   }
 
+  // handleSubmit = event => {
+  //   event.preventDefault()
+  //   axios({
+  //     url: `${apiUrl}/trips/${this.props.match.params.id}`,
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Authorization': `Token token=${this.props.user.token}`
+  //     },
+  //     data: { book: this.state.book }
+  //   })
+  //     .then(res => this.setState({ edited: true }))
+  //     .then(console.log)
+  //     .catch(console.error)
+  // }
+
+  update = () => {
+  }
+
   render () {
     const { expense, error, deleted } = this.state
     // const { user } = this.props
-    const buttons = (
-      <div>
-        <Button className="mr-2" variant="danger" onClick={this.destroy}>Delete</Button>
-      </div>
-    )
+    // const buttons = (
+    //   <div>
+    //     <Button className="mr-2" variant="danger" onClick={this.destroy}>Delete</Button>
+    //   </div>
+    // )
 
     if (deleted) {
       return <Redirect to={
@@ -79,7 +97,8 @@ class Expense extends Component {
               <td>{expense.higherCost}</td>
               <td>{expense.lowerItem}</td>
               <td>{expense.lowerCost}</td>
-              {buttons}
+              <td><Button className="mr-2" variant="primary" onClick={this.update}>Cheaper Choice!</Button></td>
+              <td><Button className="mr-2" variant="danger" onClick={this.destroy}>Delete</Button></td>
             </tr>
           </tbody>
         </Table>

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Layout from '../../shared/Layout'
 import apiUrl from '../../apiConfig'
 import Table from 'react-bootstrap/Table'
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 
 class Expenses extends Component {
   constructor (props) {
@@ -23,19 +23,6 @@ class Expenses extends Component {
       .catch(err => this.setState({ error: err.message }))
   }
 
-  destroy = (id) => {
-    axios({
-      url: (`${apiUrl}/expenses/${id}`),
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Token token=${this.props.user.token}`
-      }
-    })
-      .then(() => this.setState({ deleted: true }))
-      // .then(() => this.props.alert('You deleted a book!', 'danger'))
-      .catch(err => this.setState({ error: err.message }))
-  }
-
   render () {
     const { expenses, error, loaded } = this.state
     // const { user } = this.props
@@ -45,6 +32,7 @@ class Expenses extends Component {
         <td>{expense.higherCost}</td>
         <td>{expense.lowerItem}</td>
         <td>{expense.lowerCost}</td>
+        <td><Button as={Link} to={`/expenses/${expense._id}`}>Options</Button></td>
       </tr>
     ))
 
@@ -82,6 +70,6 @@ class Expenses extends Component {
   }
 }
 
-export default Expenses
+export default withRouter(Expenses)
 
 // <Button href={`#expenses/${this.props.match.params.id}/edit`}>Edit</Button>
