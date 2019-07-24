@@ -3,8 +3,7 @@ import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Redirect } from 'react-router-dom'
 import Layout from '../../shared/Layout'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import TripForm from './TripForm'
 
 class TripCreate extends Component {
   constructor (props) {
@@ -15,8 +14,9 @@ class TripCreate extends Component {
         transportation: '',
         lodging: '',
         costs: '',
-        total: 0,
-        runningTotal: 0
+        total: '',
+        runningTotal: 0,
+        owner: ''
       },
       createdTripId: null
     }
@@ -71,51 +71,12 @@ class TripCreate extends Component {
     return (
       <Layout md="8" lg="6">
         <h4>Add a Trip</h4>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="destination">
-            <Form.Label>Trip Title</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Destination"
-              name="destination"
-              onChange={handleChange}
-              value={trip.destination}
-            />
-          </Form.Group>
-          <Form.Group controlId="transportation">
-            <Form.Label>Transportation Costs</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="$$"
-              name="transportation"
-              onChange={handleChange}
-              value={trip.transportation}
-            />
-          </Form.Group>
-          <Form.Group controlId="lodging">
-            <Form.Label>Lodging Costs</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="$$"
-              name="lodging"
-              onChange={handleChange}
-              value={trip.lodging}
-            />
-          </Form.Group>
-          <Form.Group controlId="costs">
-            <Form.Label>Other Expenses</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="$$"
-              name="costs"
-              onChange={handleChange}
-              value={trip.costs}
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+        <TripForm
+          trip={trip}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          cancelPath='/'
+        />
       </Layout>
     )
   }

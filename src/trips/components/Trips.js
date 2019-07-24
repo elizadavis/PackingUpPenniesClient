@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Layout from '../../shared/Layout'
 import apiUrl from '../../apiConfig'
 import Table from 'react-bootstrap/Table'
-
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 
 class Trips extends Component {
   constructor (props) {
@@ -33,6 +32,7 @@ class Trips extends Component {
         <td>{trip.lodging}</td>
         <td>{trip.costs}</td>
         <td>{trip.total}</td>
+        <td><Button as={Link} to={`/trips/${trip._id}`}>Options</Button></td>
       </tr>
     ))
 
