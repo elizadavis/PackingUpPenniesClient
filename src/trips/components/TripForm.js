@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const TripForm = ({ trip, handleSubmit, handleChange, cancelPath }) => (
+const TripForm = ({ trip, handleSubmit, handleChange, cancelPath, maxLength }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Group controlId="destination">
       <Form.Label>Trip Title</Form.Label>
       <Form.Control
         type="text"
         required
+        maxLength="30"
         placeholder="Destination"
         name="destination"
         onChange={handleChange}
@@ -21,6 +22,8 @@ const TripForm = ({ trip, handleSubmit, handleChange, cancelPath }) => (
       <Form.Control
         type="number"
         required
+        min="0"
+        max="9999"
         placeholder="$$"
         name="transportation"
         onChange={handleChange}
@@ -32,6 +35,8 @@ const TripForm = ({ trip, handleSubmit, handleChange, cancelPath }) => (
       <Form.Control
         type="number"
         required
+        min="0"
+        max="9999"
         placeholder="$$"
         name="lodging"
         onChange={handleChange}
@@ -43,6 +48,8 @@ const TripForm = ({ trip, handleSubmit, handleChange, cancelPath }) => (
       <Form.Control
         type="number"
         required
+        min={0}
+        max={9999}
         placeholder="$$"
         name="costs"
         onChange={handleChange}
@@ -53,7 +60,7 @@ const TripForm = ({ trip, handleSubmit, handleChange, cancelPath }) => (
       Submit
     </Button>
     <Link to={cancelPath}>
-      <Button>Cancel</Button>
+      <Button>Go Back</Button>
     </Link>
   </Form>
 )
