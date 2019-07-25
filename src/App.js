@@ -62,10 +62,10 @@ class App extends Component {
             <ChangePassword alert={this.alert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/tripcreate' render={() => (
-            <TripCreate user={user} />
+            <TripCreate user={user} alert={this.alert} />
           )} />
           <AuthenticatedRoute user={user} exact path='/trips/:id' render={() => (
-            <Trip user={user} />
+            <Trip user={user} alert={this.alert}/>
           )} />
           <AuthenticatedRoute user={user} exact path='/trips' render={() => (
             <Trips user={user} />
