@@ -6,15 +6,25 @@ import Layout from '../../shared/Layout'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import TripForm from './TripForm'
+// import Form from 'react-bootstrap/Form'
 
 class Trip extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      trip: null,
+      trip: {
+        destination: '',
+        transportation: '',
+        lodging: '',
+        costs: '',
+        total: '',
+        runningTotal: 0,
+        owner: ''
+      },
       error: null,
-      deleted: false
+      deleted: false,
+      rTotal: 0
     }
   }
 
@@ -39,6 +49,19 @@ class Trip extends Component {
     this.setState({ trip: total })
   }
 
+  // handleSavingsChange = event => {
+  //   this.setState({ rTotal: event.target.value })
+  //   console.log(this.state.rTotal)
+  //
+  //   const addSavings = parseInt(this.state.trip.runningTotal) + parseInt(this.state.rTotal)
+  //   console.log(addSavings)
+  //
+  //   const runTotal = Object.assign(this.state.trip, { runningTotal: addSavings })
+  //   console.log(runTotal)
+  //
+  //   this.setState({ trip: runTotal })
+  // }
+
   handleSubmit = event => {
     event.preventDefault()
     axios({
@@ -47,9 +70,12 @@ class Trip extends Component {
       headers: {
         'Authorization': `Token token=${this.props.user.token}`
       },
-      data: { trip: this.state.trip }
+      data: {
+        trip: this.state.trip
+      }
     })
       .then(res => this.setState({ edited: true }))
+      .then(() => this.props.alert('Trip updated!', 'info'))
       .catch(err => this.setState({ error: err.message }))
   }
 
@@ -62,6 +88,7 @@ class Trip extends Component {
       }
     })
       .then(() => this.setState({ deleted: true }))
+      .then(() => this.props.alert('Trip Successfully Deleted!', 'warning'))
       .catch(err => this.setState({ error: err.message }))
   }
 
@@ -71,7 +98,7 @@ class Trip extends Component {
 
     if (deleted) {
       return <Redirect to={
-        { pathname: '/', state: { msg: 'Trip Successfully Deleted!' } }
+        { pathname: '/' }
       } />
     }
 
@@ -116,5 +143,20 @@ class Trip extends Component {
     )
   }
 }
+
+// <Form onSubmit={handleSubmit}>
+//   <Form.Group controlId="rTotal">
+//     <Form.Label>Apply Savings</Form.Label>
+//     <Form.Control
+//       type="number"
+//       name="rTotal"
+//       onChange={this.handleSavingsChange}
+//       value={this.state.rTotal}
+//     />
+//   </Form.Group>
+//   <Button variant="primary" type="submit">
+//     Submit
+//   </Button>
+// </Form>
 
 export default withRouter(Trip)
