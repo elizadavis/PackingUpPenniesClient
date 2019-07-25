@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Layout from '../../shared/Layout'
 import apiUrl from '../../apiConfig'
 import Table from 'react-bootstrap/Table'
@@ -23,7 +23,6 @@ class Trips extends Component {
 
   render () {
     const { trips, error, loaded } = this.state
-    // const { user } = this.props
 
     const tripsList = trips.map(trip => (
       <tr key={trip._id}>
@@ -32,7 +31,7 @@ class Trips extends Component {
         <td>{trip.lodging}</td>
         <td>{trip.costs}</td>
         <td>{trip.total}</td>
-        <td><Button as={Link} to={`/trips/${trip._id}`}>Options</Button></td>
+        <td><Button variant="success" href={`#trips/${trip._id}`}>Options</Button></td>
       </tr>
     ))
 
