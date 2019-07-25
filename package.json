@@ -1,6 +1,6 @@
 {
   "name": "PackingUpPenniesClient",
-  "homepage": "https://elizadavis.github.io/PackingUpPennies",
+  "homepage": "https://elizadavis.github.io/PackingUpPenniesClient",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
