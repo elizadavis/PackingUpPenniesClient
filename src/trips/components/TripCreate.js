@@ -33,7 +33,6 @@ class TripCreate extends Component {
 
     const aTotal = parseInt(this.state.trip.transportation) + parseInt(this.state.trip.costs) + parseInt(this.state.trip.lodging)
     const total = Object.assign(this.state.trip, { total: aTotal })
-    console.log(total)
     this.setState({ trip: total })
   }
 
@@ -57,6 +56,7 @@ class TripCreate extends Component {
       }
     })
       .then(res => this.setState({ createdTripId: res.data.trip._id }))
+      .then(() => this.props.alert('New Trip Created!', 'info'))
       .catch(console.error)
   }
 
@@ -69,7 +69,7 @@ class TripCreate extends Component {
     }
 
     return (
-      <Layout md="8" lg="6">
+      <Layout md="8" lg="4">
         <h4>Add a Trip</h4>
         <TripForm
           trip={trip}
