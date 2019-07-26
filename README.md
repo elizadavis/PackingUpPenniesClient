@@ -24,7 +24,6 @@
 - Axios
 - React Router
 
-
 ### Initial Planning, Development Process, Future Goals
 
 My original goal for this project was to include a second resource, "expenses," and use the data from this to tally up a user's savings. The idea is that users input higher and lower priced options in their day-to-day spending, their respective costs, and the calculated difference would be applied as savings for their trip when they make the thriftier choice. As I am just beginning to get a grasp on the technologies used in this project, I hope to improve upon this app over time and get it to my original plan.
@@ -52,7 +51,6 @@ My original goal for this project was to include a second resource, "expenses," 
 [Front End Repository](https://github.com/elizadavis/PackingUpPenniesClient)
 
 [Back End Repository](https://github.com/elizadavis/PackingUpPenniesAPI)
-
 
 Wireframe:
 
