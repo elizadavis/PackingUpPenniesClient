@@ -16,7 +16,12 @@ class Trips extends Component {
   }
 
   componentDidMount () {
-    axios(`${apiUrl}/trips`)
+    axios({
+      url: `${apiUrl}/trips`,
+      headers: {
+        'Authorization': `Token token=${this.props.user.token}`
+      }
+    })
       .then(res => this.setState({ trips: res.data.trips, loaded: true }))
       .catch(err => this.setState({ error: err.message }))
   }
