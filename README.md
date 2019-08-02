@@ -54,4 +54,4 @@ My original goal for this project was to include a second resource, "expenses," 
 
 Wireframe:
 
-![Wireframe](./public/Wireframe.jpg)
+![Wireframe](./public/Wireframe.JPG)
