@@ -60,7 +60,7 @@ const TripForm = ({ trip, handleSubmit, handleChange, cancelPath, maxLength }) =
       Submit
     </Button>
     <Link to={cancelPath}>
-      <Button>Go Back</Button>
+      <Button className="go-back" variant="secondary">Go Back</Button>
     </Link>
   </Form>
 )

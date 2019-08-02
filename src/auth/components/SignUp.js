@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { signUp, signIn } from '../api'
 import messages from '../messages'
+import Button from 'react-bootstrap/Button'
 
 class SignUp extends Component {
   constructor () {
@@ -70,7 +71,7 @@ class SignUp extends Component {
           placeholder="Confirm Password"
           onChange={this.handleChange}
         />
-        <button type="submit">Sign Up</button>
+        <Button variant="info" type="submit">Sign Up</Button>
       </form>
     )
   }

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 
 import { signIn } from '../api'
 import messages from '../messages'
+import Button from 'react-bootstrap/Button'
 
 class SignIn extends Component {
   constructor () {
@@ -58,7 +59,7 @@ class SignIn extends Component {
           placeholder="Password"
           onChange={this.handleChange}
         />
-        <button type="submit">Sign In</button>
+        <Button variant="info" type="submit">Sign In</Button>
       </form>
     )
   }
