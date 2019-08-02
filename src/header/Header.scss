@@ -1,14 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 $charcoal: #bbb;
+$background: #BBAB8B;
+$link: #EF8275;
 
 .main-header {
   align-items: center;
+  background-color: $background;
   border-bottom: 1px solid $charcoal;
   display: flex;
+  font-family: Nunito, sans-serif;
   height: 100px;
   padding: 0 20px;
 
   a,
   span {
+    color: $link;
     font-size: 1.2em;
     margin: 0 15px;
   }
