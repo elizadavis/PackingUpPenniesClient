@@ -14,6 +14,7 @@ import ChangePassword from './auth/components/ChangePassword'
 import Trips from './trips/components/Trips'
 import TripCreate from './trips/components/TripCreate'
 import Trip from './trips/components/Trip'
+import Home from './shared/Home'
 
 import Alert from 'react-bootstrap/Alert'
 
@@ -54,6 +55,9 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn alert={this.alert} setUser={this.setUser} />
+          )} />
+          <Route exact path='/' render={() => (
+            <Home />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut alert={this.alert} clearUser={this.clearUser} user={user} />
