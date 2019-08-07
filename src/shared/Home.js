@@ -30,7 +30,7 @@ const Home = () => (
         <img style={{ height: '100%', objectFit: 'cover', objectPosition: 'top' }}
           className="d-block w-100"
           src="santorini.jpg"
-          alt="coastline of Santorini, Greece"
+          alt="coastline of Santorini, greece"
         />
       </Carousel.Item>
     </Carousel>
