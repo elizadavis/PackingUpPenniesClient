@@ -1,85 +1,76 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import { Redirect } from 'react-router-dom'
 import Layout from '../../shared/Layout'
 import TripForm from './TripForm'
 
-class TripCreate extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      trip: {
-        destination: '',
-        transportation: '',
-        lodging: '',
-        costs: '',
-        total: '',
-        runningTotal: 0,
-        owner: ''
-      },
-      createdTripId: null
-    }
-  }
+const emptyTrip = {
+  destination: '',
+  transportation: '',
+  lodging: '',
+  costs: '',
+  total: '',
+  runningTotal: 0,
+  owner: ''
+}
 
-  handleChange = event => {
+const TripCreate = (props) => {
+  const [trip, setTrip] = useState(emptyTrip)
+  const [createdTripId, setCreatedTripId] = useState(null)
+
+  const handleChange = event => {
     const updatedField = {
       [event.target.name]: event.target.value
     }
 
-    const editedTrip = Object.assign(this.state.trip, updatedField)
+    const editedTrip = Object.assign(trip, updatedField)
 
-    this.setState({ trip: editedTrip })
+    setTrip({ ...editedTrip })
 
-    const aTotal = parseInt(this.state.trip.transportation) + parseInt(this.state.trip.costs) + parseInt(this.state.trip.lodging)
-    const total = Object.assign(this.state.trip, { total: aTotal })
-    this.setState({ trip: total })
+    const aTotal = parseInt(trip.transportation) + parseInt(trip.costs) + parseInt(trip.lodging)
+    const total = Object.assign(trip, { total: aTotal })
+    setTrip({ ...total })
   }
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault()
     axios({
       url: `${apiUrl}/trips`,
       method: 'POST',
       headers: {
-        'Authorization': `Token token=${this.props.user.token}`
+        'Authorization': `Token token=${props.user.token}`
       },
       data: {
-        trip: {
-          destination: this.state.trip.destination,
-          transportation: this.state.trip.transportation,
-          lodging: this.state.trip.lodging,
-          costs: this.state.trip.costs,
-          total: this.state.trip.total,
-          runningTotal: this.state.trip.runningTotal
-        }
+        trip: trip
       }
     })
-      .then(res => this.setState({ createdTripId: res.data.trip._id }))
-      .then(() => this.props.alert('New Trip Created!', 'info'))
+      .then(res => setCreatedTripId(res.data.trip._id))
+      .then(() => props.alert('New Trip Created!', 'info'))
       .catch(console.error)
   }
 
-  render () {
-    const { handleChange, handleSubmit } = this
-    const { trip, createdTripId } = this.state
-
+  const returnThis = () => {
     if (createdTripId) {
       return <Redirect to={`/trips/${createdTripId}`}/>
+    } else {
+      return (
+        <Layout md="8" lg="4">
+          <h4>Add a Trip</h4>
+          <TripForm
+            trip={trip}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+            cancelPath='/'
+          />
+        </Layout>
+      )
     }
-
-    return (
-      <Layout md="8" lg="4">
-        <h4>Add a Trip</h4>
-        <TripForm
-          trip={trip}
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
-          cancelPath='/'
-        />
-      </Layout>
-    )
   }
+  return (
+    // { returnThis }
+    returnThis()
+  )
 }
 
 export default TripCreate

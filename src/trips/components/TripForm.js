@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const TripForm = ({ trip, handleSubmit, handleChange, cancelPath, maxLength }) => (
+const TripForm = ({ trip, handleSubmit, handleChange, cancelPath }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Group controlId="destination">
       <Form.Label>Trip Title</Form.Label>
