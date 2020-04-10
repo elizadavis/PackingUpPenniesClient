@@ -13,10 +13,10 @@ const Trips = props => {
 
   useEffect(() => {
     console.log(props.user)
-    axios.get({
+    axios({
       url: `${apiUrl}/trips`,
       headers: {
-        'Authorization': `Bearer token=${props.user.token}`
+        'Authorization': `Token token=${props.user.token}`
       }
     })
       .then(res => setTrips(res.data.trips))

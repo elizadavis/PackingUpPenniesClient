@@ -10,10 +10,10 @@ import TripForm from './TripForm'
 
 const blankTrip = {
   destination: '',
-  transportation: '',
-  lodging: '',
-  costs: '',
-  total: '',
+  transportation: 0,
+  lodging: 0,
+  costs: 0,
+  total: 0,
   runningTotal: 0,
   owner: ''
 }
@@ -26,14 +26,14 @@ const Trip = (props) => {
   // const [loaded, setLoaded] = useState(false)
   // const [edited, setEdited] = useState(false)
 
-  const { id } = props
+  const { id } = props.match.params
 
   useEffect(() => {
     // const fetchData = async () => {
-    axios.get({
+    axios({
       url: `${apiUrl}/trips/${id}`,
       headers: {
-        'Authorization': `Bearer token=${props.user.token}`
+        'Authorization': `Token token=${props.user.token}`
       }
     })
       .then(res => setTrip({ ...res.data.trip }))
@@ -43,18 +43,20 @@ const Trip = (props) => {
   }, [])
 
   const handleChange = event => {
+    // event.preventDefault()
     const updatedField = {
       [event.target.name]: event.target.value
     }
 
     const editedTrip = Object.assign(trip, updatedField)
-
-    setTrip(...editedTrip)
+    // console.log(editedTrip)
+    setTrip({ ...editedTrip })
 
     const aTotal = parseInt(trip.transportation) + parseInt(trip.costs) + parseInt(trip.lodging)
     const total = Object.assign(trip, { total: aTotal })
 
-    setTrip(...total)
+    setTrip({ ...total })
+    console.log(total)
   }
 
   const handleSubmit = event => {
@@ -110,7 +112,7 @@ const Trip = (props) => {
               </tr>
             </thead>
             <tbody>
-              <tr key={trip._id}>
+              <tr key={trip.id}>
                 <td>{trip.destination}</td>
                 <td>{trip.transportation}</td>
                 <td>{trip.lodging}</td>
